@@ -1,0 +1,35 @@
+PROMPT: CONSOLIDATE RAKT KAVACH PWA & MAKE IT PRODUCTION READY ON PORT 3000
+
+Act as a Senior DevOps and Lead Full-Stack Architect.
+
+I have uploaded multiple project ZIP files and logo assets into this Replit workspace. Your task is to clean, merge, structure, and run the complete 'Rakt Kavach' platform.
+
+REQUIREMENTS & INSTRUCTIONS:
+
+1. ARCHITECTURE & CODE CONSOLIDATION:
+   - Extract and merge all uploaded ZIP files, keeping the newest and most complete implementation of Rakt Kavach.
+   - Clean up duplicate files, conflicting 'node_modules', old '.next' build folders, and unused workspace configs.
+   - Ensure the entire Next.js project lives cleanly in the workspace root or 'rakt-kavach-dashboard' folder, with zero TypeScript or missing file errors.
+
+2. PORT 3000 & REPLIT EXECUTION:
+   - Configure Next.js / Vite and .replit configuration to bind directly to host '0.0.0.0' and port '3000'.
+   - Ensure 'npm run dev' or 'pnpm dev' starts cleanly on port 3000 for immediate Replit local preview.
+
+3. PRODUCTION-READY INTEGRATIONS (SUPABASE, VERCEL & GITHUB):
+   - Set up standard Environment Variable references (.env.example and .env.local):
+     * NEXT_PUBLIC_SUPABASE_URL
+     * NEXT_PUBLIC_SUPABASE_ANON_KEY
+   - Prepare clean 'vercel.json' configuration optimized for Next.js builds:
+     * Framework: Next.js
+     * Build Command: npx next build
+     * Output Directory: .next
+   - Ensure Git is clean and ready to link to a fresh GitHub repository under the new account.
+
+4. PROGRESSIVE WEB APP (PWA) & BRANDING:
+   - Set App Name: "Rakt Kavach" (रक्त कवच)
+   - Description: "National Emergency Blood & Health Network"
+   - Use the uploaded emblem/logo photo as the official PWA app icon in 'public/icons' (192x192 and 512x512).
+   - Configure 'manifest.json' / 'manifest.webmanifest' and Service Worker for full standalone PWA installability ("display": "standalone", "start_url": "/").
+
+EXECUTION PLAN:
+Execute the extraction, deduplication, PWA manifest binding, and local test build now. Print a summary when Port 3000 preview is running.
