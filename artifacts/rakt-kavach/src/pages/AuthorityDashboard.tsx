@@ -370,7 +370,7 @@ export default function AuthorityDashboard() {
             {broadcastDone && (
               <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
                 className="rounded-lg p-3 text-center" style={{ background: "rgba(255,30,39,0.1)", border: "1px solid rgba(255,30,39,0.35)" }}>
-                <div className="text-sm font-black" style={{ color: "#FF1E27" }}>🔴 EMERGENCY BROADCAST DISPATCHED</div>
+                <div className="text-sm font-black" style={{ color: "#FF1E27" }}>EMERGENCY BROADCAST DISPATCHED</div>
                 <div className="text-[10px] mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>Broadcast sent to 12,847 nodes · All 3 signatures verified</div>
               </motion.div>
             )}
@@ -408,7 +408,7 @@ export default function AuthorityDashboard() {
           <Link href="/all-modules"
             className="text-[10px] font-black px-3 py-1.5 rounded-lg cursor-pointer flex items-center gap-1.5"
             style={{ background: "rgba(0,210,255,0.08)", border: "1px solid rgba(0,210,255,0.2)", color: "#00D2FF" }}>
-            🔬 ALL 100 MODULES
+            ALL 100 MODULES
           </Link>
           <Link href="/" className="text-[10px] cursor-pointer transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>
             ← {t("back")}

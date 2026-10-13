@@ -92,7 +92,7 @@ export default function DonorDashboard() {
           <span className="text-[9px] font-black tracking-widest shrink-0 px-2 py-0.5 rounded" style={{ background: "#FF1E27", color: "#fff" }}>MYBVP 1.0</span>
           <div className="flex-1 overflow-hidden h-full flex items-center">
             <div className="news-ticker-inner whitespace-nowrap text-[10px] font-bold" style={{ color: "rgba(255,200,200,0.85)" }}>
-              🔴 MYBVP 1.0: Upcoming Features: Insurance-Linked Blood Credits &amp; Family Protection Tools &nbsp;•&nbsp; रक्त कवच — One Nation, One Blood Grid &nbsp;•&nbsp; ABHA-Linked Donor Wallet Now Active &nbsp;•&nbsp; Emergency Response Time: National Average 4:32 Min &nbsp;&nbsp;&nbsp;&nbsp;🔴 MYBVP 1.0: Upcoming Features: Insurance-Linked Blood Credits &amp; Family Protection Tools &nbsp;•&nbsp; रक्त कवच — One Nation, One Blood Grid &nbsp;•&nbsp; ABHA-Linked Donor Wallet Now Active &nbsp;•&nbsp; Emergency Response Time: National Average 4:32 Min
+              MYBVP 1.0: Upcoming Features: Insurance-Linked Blood Credits &amp; Family Protection Tools &nbsp;•&nbsp; रक्त कवच — One Nation, One Blood Grid &nbsp;•&nbsp; ABHA-Linked Donor Wallet Now Active &nbsp;•&nbsp; Emergency Response Time: National Average 4:32 Min &nbsp;&nbsp;&nbsp;&nbsp;MYBVP 1.0: Upcoming Features: Insurance-Linked Blood Credits &amp; Family Protection Tools &nbsp;•&nbsp; रक्त कवच — One Nation, One Blood Grid &nbsp;•&nbsp; ABHA-Linked Donor Wallet Now Active &nbsp;•&nbsp; Emergency Response Time: National Average 4:32 Min
             </div>
           </div>
         </div>
@@ -224,14 +224,14 @@ export default function DonorDashboard() {
                   style={{ width: "33%", background: "linear-gradient(90deg, #CD7F32, #F4C430)" }} />
               </div>
               <div className="flex justify-between mt-1">
-                <span className="text-[8px]" style={{ color: "#CD7F32" }}>🥉 Bronze</span>
-                <span className="text-[8px]" style={{ color: "rgba(192,192,192,0.6)" }}>🥈 Silver (3)</span>
-                <span className="text-[8px]" style={{ color: "rgba(244,196,48,0.5)" }}>🥇 Gold (10)</span>
+                <span className="text-[8px]" style={{ color: "#CD7F32" }}>Bronze</span>
+                <span className="text-[8px]" style={{ color: "rgba(192,192,192,0.6)" }}>Silver (3)</span>
+                <span className="text-[8px]" style={{ color: "rgba(244,196,48,0.5)" }}>Gold (10)</span>
               </div>
             </div>
           </div>
           <div className="mt-3 rounded-lg p-2.5" style={{ background: "rgba(205,127,50,0.06)", border: "1px solid rgba(205,127,50,0.2)" }}>
-            <div className="text-[9px] font-bold" style={{ color: "#CD7F32" }}>💓 IMPACT: Your O+ donation (AIIMS Delhi) — Blood used in 2025 · Patient outcome: Positive</div>
+            <div className="text-[9px] font-bold" style={{ color: "#CD7F32" }}>IMPACT: Your O+ donation (AIIMS Delhi) — Blood used in 2025 · Patient outcome: Positive</div>
           </div>
         </div>
 
@@ -362,7 +362,7 @@ export default function DonorDashboard() {
               style={{ background: "rgba(0,210,255,0.03)", border: "1px solid rgba(0,210,255,0.1)" }}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs" style={{ background: "rgba(255,30,39,0.15)", border: "1px solid rgba(255,30,39,0.3)" }}>🩸</div>
+                  <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs" style={{ background: "rgba(255,30,39,0.15)", border: "1px solid rgba(255,30,39,0.3)" }}><Droplet className="w-3 h-3" style={{ color: "#FF6B6B" }} /></div>
                   <span className="text-[10px] font-black" style={{ color: "#FF6B6B" }}>{entry.bloodType}</span>
                   <span className="text-[10px]" style={{ color: "rgba(255,255,255,0.5)" }}>{entry.vol}</span>
                 </div>

@@ -6,7 +6,7 @@ const commonKeys = {
   appName: "रक्त कवच", tagline: "ONE NATION • ONE BLOOD GRID",
   chooseLanguage: "Choose Your Language",
   languageSubtext: "Donor, Hospital, Lab & Clinic Integrated National Grid",
-  btnHindi: "🇮🇳 हिन्दी", btnEnglish: "🇬🇧 English",
+  btnHindi: "हिन्दी", btnEnglish: "English",
   btnLogin: "Login", btnRegister: "Register",
   biometricSecure: "Biometric Secure", dpdpCompliant: "DPDP Act Compliant",
   poweredBy: "Powered by Smart Star Solutions",

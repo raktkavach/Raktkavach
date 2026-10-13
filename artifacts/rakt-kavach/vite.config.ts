@@ -77,7 +77,7 @@ export default defineConfig({
     allowedHosts: true
   },
   build: {
-    outDir: path.resolve(projectRoot, "dist"),
+    outDir: path.resolve(projectRoot, "dist/public"),
     emptyOutDir: true
   }
 });

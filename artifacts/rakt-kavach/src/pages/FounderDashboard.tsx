@@ -56,7 +56,7 @@ function eventToLogLine(e: RaktEvent): string {
     case "EMERGENCY_REQUEST": return `[EMERGENCY] ⚠ Request from ${e.nodeId} — ${e.payload["bloodType"] ?? "Unknown"} CRITICAL — ${time}`;
     case "NATIONAL_VALIDATE": return `[NATL] ✔ National Authority validated request from ${e.nodeId} — ${time}`;
     case "WHO_APPROVE": return `[WHO] ✔ WHO final approval granted for ${e.nodeId} — ${time}`;
-    case "EMERGENCY_BROADCAST": return `[BROADCAST] 🔴 Emergency broadcast dispatched to 12,847 nodes — ${time}`;
+    case "EMERGENCY_BROADCAST": return `[BROADCAST] Emergency broadcast dispatched to 12,847 nodes — ${time}`;
     case "BLOOD_TRANSFERRED": return `[GRID] Blood transfer: ${e.nodeId} — ${e.payload["units"] ?? "?"} units — ${time}`;
     case "BIOMETRIC_VERIFIED": return `[AUTH] Biometric verified: ${e.nodeId} — ${time}`;
     default: return `[${e.type}] ${e.nodeId} — ${time}`;

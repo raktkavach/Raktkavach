@@ -182,7 +182,7 @@ function LiveTicker({ items }: { items: string[] }) {
       <AnimatePresence mode="wait">
         <motion.div key={idx} initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -10, opacity: 0 }}
           className="text-[9px] font-bold" style={{ color: "#FF6B6B" }}>
-          🔴 {items[idx]}
+          {items[idx]}
         </motion.div>
       </AnimatePresence>
     </div>

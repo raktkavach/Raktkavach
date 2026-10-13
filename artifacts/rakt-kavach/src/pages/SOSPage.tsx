@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   AlertTriangle, Phone, ArrowLeft, MapPin, Clock, Wifi,
-  Building2, Droplets, Navigation, CheckCircle2, Radio
+  Building2, Droplets, Navigation, CheckCircle2, Radio,
+  Ambulance, ShieldCheck, Flame
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -71,9 +72,9 @@ export default function SOSPage() {
   useEffect(() => { handleLocate(); }, []);
 
   const SOS_BUTTONS = [
-    { label: "AMBULANCE", number: "108", icon: "🚑", color: "#FF1E27", bg: "rgba(255,30,39,0.12)", border: "rgba(255,30,39,0.4)" },
-    { label: "POLICE", number: "100", icon: "👮", color: "#3B82F6", bg: "rgba(59,130,246,0.12)", border: "rgba(59,130,246,0.4)" },
-    { label: "FIRE", number: "101", icon: "🚒", color: "#F97316", bg: "rgba(249,115,22,0.12)", border: "rgba(249,115,22,0.4)" },
+    { label: "AMBULANCE", number: "108", icon: Ambulance, color: "#FF1E27", bg: "rgba(255,30,39,0.12)", border: "rgba(255,30,39,0.4)" },
+    { label: "POLICE", number: "100", icon: ShieldCheck, color: "#3B82F6", bg: "rgba(59,130,246,0.12)", border: "rgba(59,130,246,0.4)" },
+    { label: "FIRE", number: "101", icon: Flame, color: "#F97316", bg: "rgba(249,115,22,0.12)", border: "rgba(249,115,22,0.4)" },
   ];
 
   return (
@@ -109,7 +110,7 @@ export default function SOSPage() {
               borderBottom: tab === t ? "2px solid #FF1E27" : "2px solid transparent",
               background: tab === t ? "rgba(255,30,39,0.04)" : "transparent",
             }}>
-            {t === "sos" ? "🚨 SOS DASHBOARD" : "🏥 INTER-HOSPITAL EXCHANGE"}
+            {t === "sos" ? "SOS DASHBOARD" : "INTER-HOSPITAL EXCHANGE"}
           </button>
         ))}
       </div>
@@ -137,7 +138,7 @@ export default function SOSPage() {
                 <button key={btn.label} onClick={() => setActiveCall(btn.number)}
                   className="flex flex-col items-center justify-center gap-2 py-6 rounded-2xl transition-all cursor-pointer active:scale-95"
                   style={{ background: btn.bg, border: `2px solid ${btn.border}`, boxShadow: `0 0 24px ${btn.bg}` }}>
-                  <span className="text-4xl">{btn.icon}</span>
+                   <btn.icon className="w-10 h-10" style={{ color: btn.color }} />
                   <span className="text-xs font-black tracking-wider" style={{ color: btn.color }}>{btn.label}</span>
                   <span className="text-2xl font-black" style={{ color: btn.color }}>{btn.number}</span>
                 </button>
@@ -164,7 +165,7 @@ export default function SOSPage() {
                     <a href={`tel:${activeCall}`}
                       className="w-full py-4 rounded-xl font-black text-white text-sm tracking-wider cursor-pointer"
                       style={{ background: "#FF1E27", boxShadow: "0 0 30px rgba(255,30,39,0.4)" }}>
-                      📞 CALL {activeCall} NOW
+                      CALL {activeCall} NOW
                     </a>
                     <button onClick={() => setActiveCall(null)} className="text-xs cursor-pointer" style={{ color: "rgba(255,255,255,0.3)" }}>Cancel</button>
                   </motion.div>
@@ -181,10 +182,11 @@ export default function SOSPage() {
               </div>
               <div className="flex flex-col divide-y divide-white/5">
                 {NEARBY_UNITS.map((unit, i) => {
-                  const iconMap = { ambulance: "🚑", police: "👮", fire: "🚒", hospital: "🏥" };
+                  const iconMap = { ambulance: Ambulance, police: ShieldCheck, fire: Flame, hospital: Building2 };
+                  const UnitIcon = iconMap[unit.type];
                   return (
                     <div key={i} className="px-4 py-3 flex items-center gap-3" style={{ background: "rgba(5,5,15,0.8)" }}>
-                      <span className="text-xl shrink-0">{iconMap[unit.type]}</span>
+                      <UnitIcon className="w-5 h-5 shrink-0" style={{ color: "#00D2FF" }} />
                       <div className="flex-1 min-w-0">
                         <div className="text-xs font-black text-white truncate">{unit.name}</div>
                         <div className="flex items-center gap-3 mt-0.5">

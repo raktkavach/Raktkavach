@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, Camera, CameraOff, Mic, MicOff, Globe, AlertTriangle,
-  ShieldAlert, Heart, Zap, Bug, Flame, ChevronRight, RotateCcw
+  ShieldAlert, Heart, Zap, Bug, Flame, ChevronRight, RotateCcw, Droplet
 } from "lucide-react";
 
 interface AIGuardianProps {
@@ -14,50 +14,50 @@ type ScanState = "idle" | "scanning" | "detected";
 type GuardianLang = "en" | "hi" | "ta" | "bn" | "gu";
 
 const LANG_LABELS: Record<GuardianLang, string> = {
-  en: "🇬🇧 English",
-  hi: "🇮🇳 हिन्दी",
-  ta: "🏳 தமிழ்",
-  bn: "🏳 বাংলা",
-  gu: "🏳 ગુજરાતી",
+  en: "English",
+  hi: "हिन्दी",
+  ta: "தமிழ்",
+  bn: "বাংলা",
+  gu: "ગુજરાતી",
 };
 
 const DETECTIONS: Record<DetectionType & string, {
-  icon: string;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   titleEn: string; titleHi: string; titleTa: string; titleBn: string; titleGu: string;
   color: string;
   stepsEn: string[]; stepsHi: string[];
   toxicity: string;
 }> = {
   injury: {
-    icon: "🩸", titleEn: "Physical Injury Detected", titleHi: "शारीरिक चोट का पता चला",
+    icon: Droplet, titleEn: "Physical Injury Detected", titleHi: "शारीरिक चोट का पता चला",
     titleTa: "உடல் காயம் கண்டறியப்பட்டது", titleBn: "শারীরিক আঘাত সনাক্ত হয়েছে", titleGu: "શારીરિક ઈજા શોધ",
     color: "#FF1E27", toxicity: "N/A",
     stepsEn: ["Apply firm pressure with clean cloth to stop bleeding.", "Elevate the injured limb above heart level.", "Do NOT remove embedded objects.", "Call 108 or visit nearest trauma centre immediately."],
     stepsHi: ["रक्तस्राव रोकने के लिए साफ कपड़े से दबाएं।", "घायल अंग को हृदय से ऊपर उठाएं।", "फंसी हुई वस्तुओं को न हटाएं।", "तुरंत 108 पर कॉल करें या नजदीकी ट्रॉमा सेंटर जाएं।"],
   },
   snake: {
-    icon: "🐍", titleEn: "Venomous Snake Bite Detected", titleHi: "विषैले सांप के काटने का पता चला",
+    icon: ShieldAlert, titleEn: "Venomous Snake Bite Detected", titleHi: "विषैले सांप के काटने का पता चला",
     titleTa: "விஷ பாம்பு கடி கண்டறியப்பட்டது", titleBn: "বিষাক্ত সাপের কামড় সনাক্ত", titleGu: "ઝેરી સાપ કરડ્યો",
     color: "#eab308", toxicity: "HIGH — Envenomation risk",
     stepsEn: ["Immobilize the bitten limb — keep below heart level.", "Remove rings/watches from affected area.", "Do NOT suck venom, cut, or apply tourniquet.", "Call 108 — antivenom must be administered within 4 hours."],
     stepsHi: ["काटे गए अंग को स्थिर करें — हृदय से नीचे रखें।", "प्रभावित क्षेत्र से अंगूठी/घड़ी हटाएं।", "ज़हर न चूसें, न काटें, न टूर्निकेट लगाएं।", "108 पर कॉल करें — 4 घंटे में एंटीवेनम जरूरी।"],
   },
   insect: {
-    icon: "🦟", titleEn: "Insect Sting / Arthropod Bite", titleHi: "कीट का डंक / काटना",
+    icon: Bug, titleEn: "Insect Sting / Arthropod Bite", titleHi: "कीट का डंक / काटना",
     titleTa: "பூச்சி கடி", titleBn: "পোকামাকড়ের কামড়", titleGu: "જંતુ ડંખ",
     color: "#f97316", toxicity: "MODERATE — Anaphylaxis watch",
     stepsEn: ["Remove stinger if visible — scrape sideways.", "Apply cold compress for 10 minutes.", "Watch for anaphylaxis: throat swelling, difficulty breathing.", "If allergic — use EpiPen and call 108 immediately."],
     stepsHi: ["दिखे तो डंक को बगल से खुरचकर निकालें।", "10 मिनट के लिए ठंडी सिकाई करें।", "गला सूजना, सांस लेने में तकलीफ — एनाफाइलेक्सिस देखें।", "एलर्जी हो — EpiPen और तुरंत 108 डायल करें।"],
   },
   burn: {
-    icon: "🔥", titleEn: "Chemical / Thermal Burn Detected", titleHi: "रासायनिक / थर्मल जलन का पता चला",
+    icon: Flame, titleEn: "Chemical / Thermal Burn Detected", titleHi: "रासायनिक / थर्मल जलन का पता चला",
     titleTa: "வேதியியல் தீக்காயம்", titleBn: "রাসায়নিক পোড়া", titleGu: "રાસાયણિક બળતરા",
     color: "#f97316", toxicity: "MODERATE–SEVERE — Depth assessment required",
     stepsEn: ["Flush with cool (not cold) running water for 20 minutes.", "Do NOT apply ice, butter, or toothpaste.", "Remove clothing/jewellery — unless stuck to skin.", "Cover loosely with sterile dressing. Call 108 for burns > 10% body area."],
     stepsHi: ["20 मिनट तक ठंडे (बर्फ नहीं) पानी से धोएं।", "बर्फ, मक्खन या टूथपेस्ट न लगाएं।", "कपड़े/आभूषण हटाएं — त्वचा से चिपके न हों तो।", "स्टेराइल ड्रेसिंग से ढकें। 10% से अधिक जलन पर 108 डायल करें।"],
   },
   cardiac: {
-    icon: "💔", titleEn: "Possible Cardiac Event — CPR Mode", titleHi: "संभावित हृदय घटना — CPR मोड",
+    icon: Heart, titleEn: "Possible Cardiac Event — CPR Mode", titleHi: "संभावित हृदय घटना — CPR मोड",
     titleTa: "இதய நிகழ்வு — CPR", titleBn: "কার্ডিয়াক ইভেন্ট — CPR", titleGu: "હૃદય ઘટના — CPR",
     color: "#FF1E27", toxicity: "CRITICAL — Every second counts",
     stepsEn: ["Check responsiveness — tap shoulders and shout.", "Call 108 immediately or ask someone nearby.", "Begin CPR: 30 chest compressions (hard & fast — 2 inches deep).", "Give 2 rescue breaths if trained. Continue until help arrives."],
@@ -65,7 +65,7 @@ const DETECTIONS: Record<DetectionType & string, {
   },
 };
 
-const DISCLAIMER = "⚠ INFORMATIONAL ASSISTANCE ONLY — This AI output is not a substitute for professional medical diagnosis. Consult a qualified medical expert immediately. In emergencies, call 108.";
+const DISCLAIMER = "IMPORTANT: INFORMATIONAL ASSISTANCE ONLY — This AI output is not a substitute for professional medical diagnosis. Consult a qualified medical expert immediately. In emergencies, call 108.";
 
 export default function AIGuardian({ onClose }: AIGuardianProps) {
   const [lang, setLang] = useState<GuardianLang>("hi");
@@ -238,7 +238,7 @@ export default function AIGuardian({ onClose }: AIGuardianProps) {
         {scanState === "detected" && det && (
           <div className="absolute inset-0 flex items-center justify-center"
             style={{ background: `${det.color}18`, border: `2px solid ${det.color}60` }}>
-            <div className="text-4xl">{det.icon}</div>
+            <det.icon className="w-9 h-9" style={{ color: det.color }} />
           </div>
         )}
 
@@ -256,7 +256,7 @@ export default function AIGuardian({ onClose }: AIGuardianProps) {
           return (
             <div key={type} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full shrink-0 text-[10px] font-bold"
               style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${detected === type ? d.color + "60" : "rgba(255,255,255,0.08)"}`, color: detected === type ? d.color : "rgba(255,255,255,0.4)" }}>
-              {d.icon} {type}
+              <d.icon className="w-3 h-3" style={{ color: d.color }} /> {type}
             </div>
           );
         })}
@@ -293,7 +293,7 @@ export default function AIGuardian({ onClose }: AIGuardianProps) {
               {/* Detection header */}
               <div className="px-4 py-3 flex items-center gap-3"
                 style={{ background: `${det.color}12`, borderBottom: `1px solid ${det.color}25` }}>
-                <span className="text-2xl">{det.icon}</span>
+                <det.icon className="w-6 h-6" style={{ color: det.color }} />
                 <div className="flex-1">
                   <div className="text-xs font-black" style={{ color: det.color }}>{getTitle(det)}</div>
                   <div className="text-[9px] mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>

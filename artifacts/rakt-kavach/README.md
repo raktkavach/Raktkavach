@@ -4,27 +4,24 @@ National Emergency Blood & Health Network — a React/Vite progressive web app w
 
 ## Run locally
 
-Requires Node.js 20 or newer.
+Requires Node.js 20 or newer and the project pnpm workspace.
+
+From the workspace root:
 
 ```sh
-npm install
-npm run dev
+pnpm --filter @workspace/rakt-kavach run dev
+pnpm --filter @workspace/rakt-kavach run typecheck
+pnpm --filter @workspace/rakt-kavach run build
 ```
 
-The development server binds to `0.0.0.0:3000`. Replit runs the same command through `.replit`.
-
-```sh
-npm run typecheck
-npm run build
-npm run preview
-```
+The Vite server binds to `0.0.0.0` and defaults to port `3000` when no `PORT` is provided. The managed Replit preview supplies its assigned port and base path automatically.
 
 ## Project layout
 
-- `src/pages/` — role dashboards, emergency SOS, and module views
+- `src/pages/` — donor, hospital, laboratory, authority, and founder dashboards; SOS and module views
 - `src/components/` — shared app and UI components
-- `public/icons/` — installed-app icon sizes derived from the uploaded Rakt Kavach emblem artwork
-- `vite.config.ts` — Vite server settings, PWA manifest, and Workbox service-worker generation
-- `vercel.json` — Vite build output and client-side route fallback
+- `public/icons/` — 192px and 512px installed-app icons derived from the Rakt Kavach emblem
+- `vite.config.ts` — Vite settings, PWA manifest, and Workbox service-worker generation
+- `../../vercel.json` — workspace-root Vercel build and client-side route fallback
 
-The production build emits `dist/manifest.webmanifest` and a Workbox service worker. Supabase environment placeholders are present for future integration; the current client does not yet connect to Supabase.
+The production build emits `dist/public/manifest.webmanifest` and a Workbox service worker. The current client remains frontend-only; Supabase placeholders are not wired to a backend.

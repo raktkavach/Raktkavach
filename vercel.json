@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm --filter @workspace/rakt-kavach run build",
+  "outputDirectory": "artifacts/rakt-kavach/dist/public",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

@@ -1,9 +1,12 @@
-# [Project name]
+# Rakt Kavach
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Progressive web app for India's emergency blood and health network, with donor and facility dashboards, an SOS flow, and module explorer.
 
 ## Run & Operate
 
+- `pnpm --filter @workspace/rakt-kavach run dev` — run the PWA (defaults to port 3000; managed preview supplies its port)
+- `pnpm --filter @workspace/rakt-kavach run typecheck` — typecheck the PWA
+- `pnpm --filter @workspace/rakt-kavach run build` — typecheck and build the PWA
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
@@ -22,15 +25,22 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/rakt-kavach/src/App.tsx` — application routes and page shell
+- `artifacts/rakt-kavach/src/pages/` — role dashboards, emergency SOS, and module explorer
+- `artifacts/rakt-kavach/src/index.css` — app styles and theme
+- `artifacts/rakt-kavach/vite.config.ts` — Vite and PWA configuration
+- `lib/api-spec/openapi.yaml` — shared API contract (currently only the health endpoint)
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The Rakt Kavach artifact is currently frontend-only; its dashboard content is not connected to a database or external service.
+- The app is a root-path static Vite artifact with SPA route fallback and a generated Workbox service worker.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Donor, hospital, lab, authority, and founder experiences.
+- Emergency SOS flow and advanced/full module explorers.
+- Installable PWA shell with 192px and 512px icons.
 
 ## User preferences
 
