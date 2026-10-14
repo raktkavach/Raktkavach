@@ -1,12 +1,17 @@
 modules = ["nodejs-24"]
 
-run = "npm run dev -- --host 0.0.0.0 --port 3000"
+run = "pnpm --filter @workspace/rakt-kavach run dev -- --port 3000"
 
-[ports]
-3000 = "http"
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 25231
+externalPort = 3000
 
 [deployment]
-run = ["sh", "-c", "npm run build && npm run preview -- --host 0.0.0.0 --port 3000"]
+run = ["sh", "-c", "pnpm --filter @workspace/rakt-kavach run build && pnpm --filter @workspace/rakt-kavach run serve -- --host 0.0.0.0 --port 3000"]
 deploymentTarget = "autoscale"
 
 [agent]

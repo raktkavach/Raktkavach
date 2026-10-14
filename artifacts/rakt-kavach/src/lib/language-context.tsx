@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { Language, translations } from "./translations";
 
 interface LanguageContextType {
@@ -10,7 +10,15 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("hi");
+  const [language, setLanguage] = useState<Language>(() => {
+    const stored = window.localStorage.getItem("rakt-kavach-language");
+    return stored && stored in translations ? (stored as Language) : "hi";
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("rakt-kavach-language", language);
+    document.documentElement.lang = language;
+  }, [language]);
 
   const t = (key: keyof typeof translations.en) => {
     return translations[language][key] || translations.en[key];

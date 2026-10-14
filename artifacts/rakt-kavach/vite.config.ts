@@ -19,9 +19,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "icons/rakt-kavach-192.png", "icons/rakt-kavach-512.png"],
       manifest: {
-        name: "Rakt Kavach (रक्त कवच)",
+        name: "Rakt Kavach - National Blood Grid",
         short_name: "Rakt Kavach",
-        description: "National Emergency Blood & Health Network",
+        description: "India's national blood-grid coordination network.",
         lang: "en-IN",
         start_url: "/",
         scope: "/",

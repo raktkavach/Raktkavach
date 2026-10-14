@@ -143,6 +143,36 @@ export const translations = {
     aiGuardianTitle: "AI ગાર્ડિયન", raktveerTitle: "રક્તવીર ક્રમ",
     ekoshSync: "e-RaktKosh: સિંક્ડ",
   },
+  pa: {
+    ...commonKeys,
+    tagline: "ਇੱਕ ਰਾਸ਼ਟਰ • ਇੱਕ ਖੂਨ ਗਰਿੱਡ",
+    chooseLanguage: "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ",
+    back: "ਵਾਪਸ",
+    roleDonor: "ਖੂਨਦਾਨੀ",
+    roleHospital: "ਹਸਪਤਾਲ ਨੋਡ",
+    roleLab: "ਲੈਬ / ਕਲੀਨਿਕ",
+    roleAuthority: "ਰਾਸ਼ਟਰੀ ਅਥਾਰਟੀ",
+  },
+  te: {
+    ...commonKeys,
+    tagline: "ఒక దేశం • ఒక రక్త గ్రిడ్",
+    chooseLanguage: "మీ భాషను ఎంచుకోండి",
+    back: "వెనక్కి",
+    roleDonor: "రక్తదాత",
+    roleHospital: "ఆసుపత్రి నోడ్",
+    roleLab: "ల్యాబ్ / క్లినిక్",
+    roleAuthority: "జాతీయ అధికారం",
+  },
+  mr: {
+    ...commonKeys,
+    tagline: "एक राष्ट्र • एक रक्त ग्रिड",
+    chooseLanguage: "तुमची भाषा निवडा",
+    back: "मागे",
+    roleDonor: "रक्तदाता",
+    roleHospital: "रुग्णालय नोड",
+    roleLab: "लॅब / क्लिनिक",
+    roleAuthority: "राष्ट्रीय प्राधिकरण",
+  },
 };
 
 export type Language = keyof typeof translations;

@@ -4,6 +4,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/lib/language-context";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { InstallPrompt } from "@/components/InstallPrompt";
+import { AuthGate } from "@/components/AuthGate";
 
 const NotFound = lazy(() => import("@/pages/not-found"));
 const GatewayPage = lazy(() => import("@/pages/GatewayPage"));
@@ -23,11 +26,11 @@ function Router() {
     <Suspense fallback={<div className="min-h-screen bg-[#050b18]" aria-label="Loading" />}>
       <Switch>
         <Route path="/" component={GatewayPage} />
-        <Route path="/donor" component={DonorDashboard} />
-        <Route path="/hospital" component={HospitalDashboard} />
-        <Route path="/lab" component={LabDashboard} />
-        <Route path="/authority" component={AuthorityDashboard} />
-        <Route path="/founder" component={FounderDashboard} />
+        <Route path="/donor" component={() => <AuthGate allowedRoles={["donor"]}><DonorDashboard /></AuthGate>} />
+        <Route path="/hospital" component={() => <AuthGate allowedRoles={["hospital"]}><HospitalDashboard /></AuthGate>} />
+        <Route path="/lab" component={() => <AuthGate allowedRoles={["lab"]}><LabDashboard /></AuthGate>} />
+        <Route path="/authority" component={() => <AuthGate allowedRoles={["authority", "founder"]}><AuthorityDashboard /></AuthGate>} />
+        <Route path="/founder" component={() => <AuthGate allowedRoles={["founder"]}><FounderDashboard /></AuthGate>} />
         <Route path="/sos" component={SOSPage} />
         <Route path="/modules" component={AdvancedModulesPage} />
         <Route path="/all-modules" component={AllModulesPage} />
@@ -45,6 +48,8 @@ function App() {
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
             <Router />
           </WouterRouter>
+          <LanguageSwitcher />
+          <InstallPrompt />
           <Toaster />
         </LanguageProvider>
       </TooltipProvider>
